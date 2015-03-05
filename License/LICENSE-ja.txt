@@ -1,0 +1,12 @@
+
+本ソフトウェアは、オープンソースライセンス Eclipse Public License v1.0
+により配布し、あなたがライセンス条項に従うことに同意する場合のみ利用す
+ることが可能です。あなたが本ソフトウェアを取得、使用、あるいは配布した
+時点で、ライセンス条項に同意したものとみなします。
+
+Eclipse Public License v1.0 の詳細については、Eclipse Foundation の
+Webサイトをご参照下さい。（EPLに関するFAQのURLは、
+http://www.eclipse.org/legal/eplfaq.php#EPLVERSION）
+
+本ソフトウェアの派生物のバイナリを販売したい場合等、その他の利用法を希
+望される場合は、（独）産業技術総合研究所にご相談下さい。

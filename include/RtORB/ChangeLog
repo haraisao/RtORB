@@ -1,0 +1,130 @@
+2010-02-25  SAITO Muneyoshi  <yoshi@ubuntu-vm>
+
+	* corba-interface.hh (CORBA_interface): 
+
+	T_PtrでコンストラクタにCORBA_Objectオブジェクトが来たときにだけ
+	インスタンスを作る。
+
+	* corba-seq.hh (CORBA_sequence): 
+
+	メモリリークの修正。T_Seq, T_PtrSeq テンプレートにコピーコンストラクタを追加。
+
+2010-02-23  SAITO Muneyoshi  <yoshi@ubuntu-vm>
+
+	* corba-defs.h : 
+
+	値型のCORBA_***_var の定義の追加。
+
+	* corba-interface.hh (CORBA_interface): 
+
+	メモリリークの修正。CInArg テンプレートの追加。T_Helperから変更。
+
+2010-02-16  SAITO Muneyoshi  <yoshi@ubuntu-vm>
+
+	* corba-seq.hh : 
+	* corba-var.hh : 
+
+	メモリリークの修正。
+
+	* corba-interface.hh (CORBA_interface): 
+
+	T_Ptrでオブジェクトを開放、生成をしている点修正。T_Ptrではしてはい
+	けない。
+
+	* corba-any.hh (CORBA):
+
+	Any *キャストオペレーターの追加。
+
+2010-02-05  SAITO Muneyoshi  <yoshi@ubuntu-vm>
+
+	* corba-struct.hh (CORBA_struct): 
+
+	CORBA_struct::T_Outにコピーコンストラクタを追加。Invalid memory readの修正。
+
+2010-02-04  SAITO Muneyoshi  <yoshi@ubuntu-vm>
+
+	* corba-struct.hh (CORBA_struct):
+
+	T_Helper::_retnew の引数をポインタから参照へ変更。
+
+2008-05-19  SAITO Muneyoshi  <yoshi@stiglitz.msi.co.jp>
+
+	* corba-defs.h :
+
+	CORBA_any_val 型の導入。unionで各型のデータを保持。
+
+2008-04-21  SAITO Muneyoshi  <yoshi@stiglitz.msi.co.jp>
+
+	* poa.hh:
+
+	servant_to_reference メソッドの追加。
+
+2008-04-18  SAITO Muneyoshi  <yoshi@stiglitz.msi.co.jp>
+
+	* corba-object-defs.hh:
+
+	CORBA::_nil()が Object_ptrを返すのではなく、CORBA_Object を返すように変更。
+	複数のコピーオペレータにマッチしてしまうため。
+
+	* corba-seq.hh:
+
+	realloc によって新たに確保された領域をゼロクリアする。
+
+2008-04-16  SAITO Muneyoshi  <yoshi@stiglitz.msi.co.jp>
+
+	* corba.h (RtORB_alloc):
+
+	malloc ではなくcallocを使用し、確保したメモリ領域をゼロクリアする。
+	Cタイプのsequence型のコピーの際不具合が起きるため。
+
+2008-04-09  SAITO Muneyoshi  <yoshi@stiglitz.msi.co.jp>
+
+	* corba-defs.h : CORBA_any::
+
+	operator<<=(CORBA_unsinged_long), operator>>=(CORBA_unsinged_long),
+	の追加。
+
+	* poa.hh:
+
+	POA クラスの _manager メンバ(PortableServer_POAManager)を削除
+	PortableServer_POA に同じものがある。
+
+	POA クラスのenv メンバ (CORBA_Environment) を削除。CORBA::Object
+	と重複。
+
+	* corba-seq.hh:
+
+	配列要素を0クリアするため、配列要素バッファのメモリ確保の
+	際はmallocではなくcallocを使用する。
+	
+
+2008-04-04  SAITO Muneyoshi  <yoshi@stiglitz.msi.co.jp>
+
+	* corba-object-defs.hh (class CORBA_Narrow): 
+
+	インターフェースオブジェクトのnarrow の際、既存のオブジェクトを使
+	い回すのでなく、新たにオブジェクトを作成する。
+
+	* functions/corba-typecode.h (CORBA_TypeCode_is_fixed_size):
+
+	giop-marshal.c から移動。is_fixed_size より関数名を変更。
+
+	* poa.hh: POA_var のクラス化。メモリリーク対策。
+
+	* corba-defs.hh: ORB_var のクラス化。メモリリーク対策。
+
+2008-04-03  SAITO Muneyoshi  <yoshi@stiglitz.msi.co.jp>
+
+	* corba-struct.hh: 構造体に関するクラスの宣言をcorba-defs.hhから分離
+
+2008-04-02  SAITO Muneyoshi  <yoshi@stiglitz.msi.co.jp>
+
+	* corba-defs.hh: 例外処理の実装。
+
+	* corba-defs.h : CORBA_System_Exceptions enumの削除。
+
+2008-03-27  SAITO Muneyoshi  <yoshi@stiglitz.msi.co.jp>
+
+	* 関数引数のC<->CPP型変換を行なうCInArg, COutArg, CInOutArg,
+	  CppInArg, CppOutArg, CppInOutArg の各クラスを追加。
+

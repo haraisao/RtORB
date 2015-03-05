@@ -1,0 +1,166 @@
+/*
+ * Copyright (c) 2008, AIST.
+ * All rights reserved. This program is made available under the terms of the
+ * Eclipse Public License v1.0 which accompanies this distribution, and is
+ * available at http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * National Institute of Advanced Industrial Science and Technology (AIST)
+ */
+#ifndef __ECHO_IDL__
+#define __ECHO_IDL__
+
+module RTC {
+  //------------------------------------------------------------
+  // Basic data type definition
+  //------------------------------------------------------------
+  struct Time
+  {
+        unsigned long sec;    // sec
+        unsigned long nsec;   // nano sec
+  };
+
+  struct TimedState
+  {
+	Time tm;
+	short data;
+  };
+
+  struct TimedShort
+  {
+	Time tm;
+	short data;
+  };
+
+  struct TimedLong
+  {
+	Time tm;
+	long data;
+  };
+
+  struct TimedUShort
+  {
+	Time tm;
+	unsigned short data;
+  };
+
+  struct TimedULong
+  {
+	Time tm;
+	unsigned long data;
+  };
+
+  struct TimedFloat
+  {
+	Time tm;
+	float data;
+  };
+
+  struct TimedDouble
+  {
+	Time tm;
+	double data;
+  };
+
+  struct TimedChar
+  {
+	Time tm;
+	char data;
+  };
+
+  struct TimedBoolean
+  {
+	Time tm;
+	boolean data;
+  };
+
+  struct TimedOctet
+  {
+	Time tm;
+	octet data;
+  };
+
+  struct TimedString
+  {
+	Time tm;
+	string data;
+  };
+
+
+  /*!
+   * Sequence data type
+   */
+  struct TimedShortSeq
+  {
+	Time tm;
+	sequence<short> data;
+  };
+
+  struct TimedLongSeq
+  {
+	Time tm;
+	sequence<long> data;
+  };
+
+  struct TimedUShortSeq
+  {
+	Time tm;
+	sequence<unsigned short> data;
+  };
+
+  struct TimedULongSeq
+  {
+	Time tm;
+	sequence<unsigned long> data;
+  };
+
+  struct TimedFloatSeq
+  {
+	Time tm;
+	sequence<float> data;
+  };
+
+  struct TimedDoubleSeq
+  {
+	Time tm;
+	sequence<double> data;
+  };
+
+  struct TimedCharSeq
+  {
+	Time tm;
+	sequence<char> data;
+  };
+
+  struct TimedBooleanSeq
+  {
+	Time tm;
+	sequence<boolean> data;
+  };
+
+  struct TimedOctetSeq
+  {
+	Time tm;
+	sequence<octet> data;
+  };
+
+  struct TimedStringSeq
+  {
+	Time tm;
+	sequence<string> data;
+  };
+  
+
+  interface Echo {
+    string echoString(in string mesg);
+
+    TimedLongSeq echoTimedLongSeq(in TimedLongSeq x);
+
+    TimedStringSeq echoTimedStringSeq(in TimedStringSeq x);
+
+
+  };
+
+};
+
+
+#endif  // __ECHO_IDL__

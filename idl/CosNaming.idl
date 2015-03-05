@@ -1,0 +1,289 @@
+/*
+ * Copyright (c) 2008, AIST.
+ * All rights reserved. This program is made available under the terms of the
+ * Eclipse Public License v1.0 which accompanies this distribution, and is
+ * available at http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * National Institute of Advanced Industrial Science and Technology (AIST)
+ */
+//
+//                            Package   : omniORB3
+// Naming.idl		     
+//                            
+//
+//
+// Description:
+//	IDL interfaces for COSS Extended Naming Service
+//	
+/*!
+ * @file CosNaming.idl
+ * @if jp
+ * @brief IDL interfaces for COSS Extended Naming Service 
+ * @else
+ * @brief IDL interfaces for COSS Extended Naming Service 
+ * @endif
+ * @author National Institute of Advanced Industrial Science and Technology (AIST)
+ */
+
+#ifndef _COS_NAMING_IDL_
+#define _COS_NAMING_IDL_
+
+// omniORB specific pragmas to insert extra includes into the stub header.
+#pragma hh #include "COS_sysdep.h"
+
+
+#pragma prefix "omg.org"
+
+module CosNaming {
+
+  typedef string Istring;
+
+  struct NameComponent {
+    Istring id;
+    Istring kind;
+  };
+
+  typedef sequence<NameComponent> Name;
+
+  enum BindingType {nobject, ncontext};
+
+  struct Binding {
+    Name        binding_name;
+    BindingType binding_type;
+  };
+  // Note: In struct Binding, binding_name is incorrectly defined
+  // as a Name instead of a NameComponent. This definition is
+  // unchanged for compatibility reasons.
+
+  typedef sequence <Binding> BindingList;
+
+  interface BindingIterator;
+
+  //-- Naming Context --//
+  interface NamingContext {
+
+    enum NotFoundReason {missing_node, not_context, not_object};
+
+    exception NotFound {
+      NotFoundReason why;
+      Name           rest_of_name;
+    };
+
+    exception CannotProceed {
+      NamingContext cxt;
+      Name          rest_of_name;
+    };
+
+    exception InvalidName {};
+    exception AlreadyBound {};
+    exception NotEmpty {};
+
+    boolean __is_a (in string id);
+
+    /*!
+     * @if jp
+     * @brief オブジェクト参照を、指定されたバインディング名でネームサービスに登録する。名前が重複した時は例外を発生。
+     * @else
+     * @brief Abstract (TODO)
+     * @endif
+     * @param n binding name
+     * @param obj CORBA object
+     * @return void
+     */
+    void bind (in Name n, in Object obj)
+      raises (NotFound, CannotProceed, InvalidName, AlreadyBound);
+
+    /*!
+     * @if jp
+     * @brief ネームサービスのオブジェクト参照の名前が既に別のオブジェクトにバインディングされいる時に変更を行う。名前が重複した時は例外を発生。
+     * @else
+     * @brief Abstract (TODO)
+     * @endif
+     * @param n binding name
+     * @param obj CORBA object
+     * @return void
+     */
+    void rebind (in Name n, in Object obj)
+      raises (NotFound, CannotProceed, InvalidName);
+
+    /*!
+     * @if jp
+     * @brief 指定されたネーミングコンテキストを、指定されたバインディング名でネームサービスに登録する。
+     * @else
+     * @brief Abstract (TODO)
+     * @endif
+     * @param n binding name
+     * @param nc Naming Context
+     * @return void
+     */
+    void bind_context (in Name n, in NamingContext nc)
+      raises (NotFound, CannotProceed,  InvalidName, AlreadyBound);
+
+    /*!
+     * @if jp
+     * @brief 指定されたネーミングコンテキストを、指定されたバインディング名でネームサービスに再登録する。
+     * @else
+     * @brief Abstract (TODO)
+     * @endif
+     * @param n binding name
+     * @param nc Naming Context
+     * @return void
+     */
+    void rebind_context (in Name n, in NamingContext nc)
+      raises (NotFound, CannotProceed, InvalidName);
+
+    /*!
+     * @if jp
+     * @brief 指定されたバインディング名に関係づけられたオブジェクト参照を獲得する。
+     * @else
+     * @brief Abstract (TODO)
+     * @endif
+     * @param n binding name
+     * @return Object Reference
+     */
+    Object resolve (in Name n)
+      raises (NotFound, CannotProceed, InvalidName);
+
+    /*!
+     * @if jp
+     * @brief 指定されたバインディングをネーミングサービスから削除する。
+     * @else
+     * @brief Abstract (TODO)
+     * @endif
+     * @param n binding name
+     * @return void
+     */
+    void unbind (in Name n)
+      raises (NotFound, CannotProceed, InvalidName);
+
+    NamingContext new_context ();
+
+    /*!
+     * @if jp
+     * @brief 新規にネーミングコンテキストを作成し、指定されたバインディング名でネーミングサービスに登録する。
+     * @else
+     * @brief Abstract (TODO)
+     * @endif
+     * @param n binding name
+     * @return (TODO)
+     */
+    NamingContext bind_new_context (in Name n)
+      raises (NotFound, CannotProceed, InvalidName, AlreadyBound);
+
+    /*!
+     * @if jp
+     * @brief ネーミングコンテキストを削除する。
+     * @else
+     * @brief Delete this NamingContext.
+     * @endif
+     * @return void
+     */
+    void destroy () raises (NotEmpty);
+
+    /*!
+     * @if jp
+     * @brief ネーミングコンテキストに格納されている、オブジェクト参照のバインディング名リストを獲得する。
+     * @else
+     * @brief Abstract (TODO)
+     * @endif
+     * @param how_many (TODO)
+     * @param bl (TODO)
+     * @param bi (TODO)
+     * @return void
+     */
+    void list (in unsigned long how_many,
+	       out BindingList bl, out BindingIterator bi);
+  };
+
+  //-- BindingIterator --//	
+  interface BindingIterator {
+    /*!
+     * @if jp
+     * @brief ネーミングコンテキスト内の次のバインディングを取得する。
+     * @else
+     * @brief Abstract (TODO)
+     * @endif
+     * @param b (TODO)
+     * @return bool
+     */
+    boolean next_one (out Binding b);
+    /*!
+     * @if jp
+     * @brief ネーミングコンテキスト内の次のn個のバインディングを取得する。
+     * @else
+     * @brief Abstract (TODO)
+     * @endif
+     * @param how_many (TODO)
+     * @param bl (TODO)
+     * @return bool
+     */
+    boolean next_n   (in unsigned long how_many, out BindingList bl);
+    /*!
+     * @if jp
+     * @brief バインディングイテレータオブジェクトを破棄する。
+     * @else
+     * @brief Destroy object of Binding Iterator. 
+     * @endif
+     * @return void
+     */
+    void    destroy  ();
+  };
+
+  //-- Naming Context Ext --//
+  interface NamingContextExt : NamingContext {
+    typedef string StringName;
+    typedef string Address;
+    typedef string URLString;
+
+    /*!
+     * @if jp
+     * @brief 構造体型のバインディング名を文字列表記のバインディング名に変換する。
+     * @else
+     * @brief Abstract (TODO)
+     * @endif
+     * @param n (TODO)
+     * @return (TODO)
+     */
+    StringName  to_string(in Name n)      raises(InvalidName);
+
+    /*!
+     * @if jp
+     * @brief 文字列表記のバインディング名を構造体型のバインディング名に変換する。
+     * @else
+     * @brief Abstract (TODO)
+     * @endif
+     * @param sn (TODO)
+     * @return (TODO)
+     */
+    Name        to_name(in StringName sn) raises(InvalidName);
+
+    exception InvalidAddress {};
+
+    /*!
+     * @if jp
+     * @brief 与えられたアドレスと文字列表記のバインディング名からURLアドレスを作成する。
+     * @else
+     * @brief Abstract (TODO)
+     * @endif
+     * @param addr (TODO)
+     * @param sn (TODO)
+     * @return (TODO)
+     */
+    URLString   to_url(in Address addr, in StringName sn)
+      raises(InvalidAddress, InvalidName);
+
+    /*!
+     * @if jp
+     * @brief 指定されたバインディング名に関連付けられたオブジェクトリファレンスを獲得する。文字列表記のバインディング名が指定される。
+     * @else
+     * @brief Abstract (TODO)
+     * @endif
+     * @param n (TODO)
+     * @return (TODO)
+     */
+    Object      resolve_str(in StringName n)
+      raises(NotFound, CannotProceed, InvalidName, AlreadyBound);
+  };
+};
+
+#endif /* ifndef _COS_NAMING_IDL_ */

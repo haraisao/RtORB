@@ -1,0 +1,32 @@
+/*
+ * Copyright (c) 2008, AIST.
+ * All rights reserved. This program is made available under the terms of the
+ * Eclipse Public License v1.0 which accompanies this distribution, and is
+ * available at http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * National Institute of Advanced Industrial Science and Technology (AIST)
+ */
+#ifndef __STRUCT_IDL__
+#define __STRUCT_IDL__
+
+module StructTest {
+
+  struct Point {
+    long x;
+    long y;
+  };
+
+  interface Tester {
+
+    Point ret();
+
+    void get(out Point p);
+    void set(in  Point p);
+
+    void update(inout Point p);
+
+  };
+
+};
+
+#endif  // __STRUCT_IDL__

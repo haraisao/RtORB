@@ -1,0 +1,36 @@
+OpenRTM 0.2.0で使用しているCORBA関数群
+
+// Basic func
+CORBA::string_dup();
+CORBA::is_nil()；
+CORBA::ULong i(0);
+CORBA::release(m_pInPort);
+CORBA::string_free(instance_name);
+
+// ORB
+CORBA::ORB_init(_argc, _argv);
+
+orb->resolve_initial_references("RootPOA");
+orb->run();
+orb->work_pending();
+orb->perform_work();
+orb->shutdown(true);
+orb->destroy();
+
+/// Context
+rootContext->resolve(name.get());
+
+// POA
+poa->activate_object(&m_StatePort);
+poa->deactivate_object(id);
+poa->servant_to_reference(comp);
+poa->servant_to_id(this);
+POA->destroy(false, false);
+
+POA->the_POAManager();
+
+// POAManager
+POAManager->activate();
+POAManager->deactivate(true, true);
+
+

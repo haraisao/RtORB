@@ -1,0 +1,7 @@
+2008-05-21  SAITO Muneyoshi  <yoshi@stiglitz.msi.co.jp>
+
+	* NameService.c:
+
+	SIGINT, SIGTERM 時にshmcCloseを呼び出す。shmc使用時には、プロセス
+	終了時に shmcCloseを呼び出さないと, shm, sem のリークを引き起す。
+

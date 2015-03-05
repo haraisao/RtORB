@@ -1,0 +1,38 @@
+/*
+ * Copyright (c) 2008, AIST.
+ * All rights reserved. This program is made available under the terms of the
+ * Eclipse Public License v1.0 which accompanies this distribution, and is
+ * available at http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * National Institute of Advanced Industrial Science and Technology (AIST)
+ */
+#ifndef __ECHO_IDL__
+#define __ECHO_IDL__
+
+
+
+typedef string Istring;
+
+struct NameComponent {
+    Istring id;
+    Istring kind;
+};
+
+typedef sequence<NameComponent> Name;
+
+
+interface Echo {
+  string echoString(in string mesg);
+  string echoString2(in string mesg, out string res);
+  string echoString3(inout string mesg);
+
+  long plus(in long x, in long y);
+  void plus2(in long x, in long y, out long ans);
+
+  float divide(in float x, in float y);
+  void divide2(in float x, in float y, out float ans);
+
+  void bind (in Name n, in Object obj);
+};
+
+#endif  // __ECHO_IDL__

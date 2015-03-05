@@ -1,0 +1,6 @@
+
+
+1. Check a NameService runs with localhost:2809.
+2. Run Server: ./Server -ORBInitRef NameService=corbaloc::localhost:2809/NameService
+3. Then run Client: ./Client -ORBInitRef NameService=corbaloc::localhost:2809/NameService
+4. If you find no error, RtORB has finished successfully.

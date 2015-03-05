@@ -1,0 +1,52 @@
+2010-02-25  SAITO Muneyoshi  <yoshi@ubuntu-vm>
+
+	* allocater.c (RtORB_Result__free): 
+	* giop.c (invokeServant): 
+
+	Result オブジェクトの開放。segmentation faultの原因となっていた、
+	メモリ確保・開放の対応付けの不一致を解消。
+
+2010-02-24  SAITO Muneyoshi  <yoshi@ubuntu-vm>
+
+	* CXX/CosNaming-stubs.cc (__attribute__):
+
+	CORBA_sequence_CosNaming_NameComponent::CppSeq の
+	コピーコンストラクタ、()オペレーターを削除。idl-compilerの
+	修正によりヘッダにて実装。
+
+2010-02-16  SAITO Muneyoshi  <yoshi@ubuntu-vm>
+
+	* giop-marshal.c (demarshal_by_typecode): 
+
+	struct, sequenceはCORBA実装からポインタではなく
+	値として渡される。
+
+	一部リークを起こす箇所があるが、これを直すとセグメンテ
+	ーションフォルトとなる。
+
+	* allocater.c (RtORB_Arguments_free): 
+
+	sequenceのメモリリークの修正。
+
+2008-06-05  SAITO Muneyoshi  <yoshi@stiglitz.msi.co.jp>
+
+	* giop.c (invokeServant):
+
+	バグ修正：_is_a, _non_existent 関数の際のpos変数の初期化。
+
+	* corba-any.c (CORBA_any_alloc): 
+
+	clear 引数の追加。
+
+	* corba-any.c (CORBA_any_set_value):
+
+	CORBA_any_alloc の呼び出しの際、any変数の初期化をしない。
+
+2008-05-22  SAITO Muneyoshi  <yoshi@stiglitz.msi.co.jp>
+
+	* connection.c (use_socket): ホスト名からIPアドレスへの変更。
+
+2008-04-25  SAITO Muneyoshi  <yoshi@stiglitz.msi.co.jp>
+
+	*  GIOP_ConnectionHandler によるソケットの隠蔽
+

@@ -1,0 +1,42 @@
+CorbaNaming.cpp:
+	m_nameServer = "corbaloc::" + m_nameServer + "/NameService";
+	obj = m_varORB->string_to_object(m_nameServer.c_str());
+
+	m_rootContext->bind(name, obj);
+	m_rootContext->rebind(name, obj);
+	cxt = cxt->bind_new_context(subName(name, i, i));
+	cxt->resolve(subName(name, i, i))
+	CosNaming::NamingContext::_duplicate(context)
+	m_rootContext->resolve(name);
+	m_rootContext->unbind(name);
+	m_rootContext->new_context
+
+CorbaPort.cpp:
+	 m_pPOA->activate_object(comp);
+	 RTObject::_narrow(m_pPOA->id_to_reference(id)
+	 m_pPOA->servant_to_id(comp);
+	 m_pPOA->deactivate_object(id);
+
+Manager.cpp:
+	m_pORB = CORBA::ORB_init(argc, argv);
+	m_pORB->resolve_initial_references("RootPOA");
+	m_pPOA->the_POAManager();
+
+NVUtil.cpp:
+	
+
+PeriodicExecutionContext.cpp:
+	
+PortAdmin.cpp:
+	
+PortBase.cpp:
+
+RTObject.cpp:
+	status = new CORBA::Any(m_sdoStatus[index].value);
+
+SdoConfiguration.cpp:
+
+SdoOrganization.cpp:
+	
+
+
